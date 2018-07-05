@@ -1,5 +1,3 @@
 <resources>
     <string name="app_name">Android_Me</string>
-
-    <string name="descFragmentBodyPartContent">The displayer of body parts</string>
 </resources>
