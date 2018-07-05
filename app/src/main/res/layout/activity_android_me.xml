@@ -36,6 +36,18 @@
         android:layout_height="180dp"
         android:scaleType="centerInside"/>
 
+        <!-- This container holds the torso BodyPartFragment of the custom Android-Me image -->
+        <FrameLayout android:id="@+id/torso_container"
+            android:layout_width="match_parent"
+            android:layout_height="180dp"
+            android:scaleType="centerInside"/>
+
+        <!-- This container holds the legs BodyPartFragment of the custom Android-Me image -->
+        <FrameLayout android:id="@+id/legs_container"
+            android:layout_width="match_parent"
+            android:layout_height="180dp"
+            android:scaleType="centerInside"/>
+
 
 
     </LinearLayout>

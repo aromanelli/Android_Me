@@ -26,7 +26,6 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 
 import com.example.android.android_me.R;
-import com.example.android.android_me.data.AndroidImageAssets;
 
 import java.util.List;
 
@@ -64,8 +63,8 @@ public class BodyPartFragment extends Fragment {
         // TODO (3) If a list of image ids exists, set the image resource to the correct item in that list
         // Otherwise, create a Log statement that indicates that the list was not found
         if (mImageIds != null) {
-            // Set the image to the first in our list of head images
-            imageView.setImageResource(AndroidImageAssets.getHeads().get(mListIndex));
+            // Set the image to the first in our list of body type images
+            imageView.setImageResource(mImageIds.get(mListIndex));
         } else {
             Log.w(TAG, "onCreateView: No list of image ids are available!");
         }
