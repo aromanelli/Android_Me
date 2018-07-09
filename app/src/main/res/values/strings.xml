@@ -1,3 +1,10 @@
 <resources>
     <string name="app_name">Android_Me</string>
+
+    <string name="text_button_next">Next</string>
+
+    <string name="key_index_head">indexHead</string>
+    <string name="key_index_body">indexBody</string>
+    <string name="key_index_legs">indexLegs</string>
+
 </resources>

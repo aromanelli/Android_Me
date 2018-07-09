@@ -16,8 +16,11 @@
 
 package com.example.android.android_me.ui;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
+import android.view.View;
 import android.widget.Toast;
 
 import com.example.android.android_me.R;
@@ -26,24 +29,65 @@ import com.example.android.android_me.R;
 // Implement the MasterListFragment callback, OnImageClickListener
 public class MainActivity extends AppCompatActivity implements MasterListFragment.OnImageClickListener{
 
+    final static private String TAG = MainActivity.class.getSimpleName();
+
+    private int mSelectedHead;
+    private int mSelectedBody;
+    private int mSelectedLegs;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        if (savedInstanceState == null) {
+            // TODO (4) Get a reference to the "Next" button and launch the intent when this button is clicked
+            findViewById(R.id.button_next).setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+
+                    // TODO (3) Put this information in a Bundle and attach it to an Intent that will launch an AndroidMeActivity
+
+                    final Bundle bundle = new Bundle(3);
+                    bundle.putInt(getString(R.string.key_index_head), mSelectedHead);
+                    bundle.putInt(getString(R.string.key_index_body), mSelectedBody);
+                    bundle.putInt(getString(R.string.key_index_legs), mSelectedLegs);
+
+                    final Intent intent = new Intent(MainActivity.this, AndroidMeActivity.class);
+                    intent.putExtras(bundle);
+
+                    startActivity(intent);
+                }
+            });
+        }
+
     }
 
     // Define the behavior for onImageSelected
     public void onImageSelected(int position) {
+        Log.d(TAG, "onImageSelected() called with: position = [" + position + "]");
+
         // Create a Toast that displays the position that was clicked
         Toast.makeText(this, "Position clicked = " + position, Toast.LENGTH_SHORT).show();
 
         // TODO (2) Based on where a user has clicked, store the selected list index for the head, body, and leg BodyPartFragments
-
-        // TODO (3) Put this information in a Bundle and attach it to an Intent that will launch an AndroidMeActivity
-
-        // TODO (4) Get a reference to the "Next" button and launch the intent when this button is clicked
+        int qtyPartsPerType = 12; // How many parts for each part type (Head, Body, Legs)
+        int idPartsType = position / qtyPartsPerType; // id for part type (0/Head, 1/Body, 2/Legs)
+        int indexPartTypeList = position - (qtyPartsPerType * idPartsType); // index in specific part type List
+        switch( idPartsType ) {
+            case 0:
+                mSelectedHead = indexPartTypeList;
+                break;
+            case 1:
+                mSelectedBody = indexPartTypeList;
+                break;
+            case 2:
+                mSelectedLegs = indexPartTypeList;
+                break;
+            default:
+                Log.e(TAG, "onImageSelected: idPartsType: ["+ idPartsType +"], indexInPartList: ["+ indexPartTypeList +"]");
+                break;
+        }
 
     }
 
